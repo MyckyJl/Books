@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 
+import BookItem from '../../containers/BookItem.jsx';
+
 import './BookListRender.scss';
 
 export default class BookListRender extends Component {
     render() {
-        const books = this.props.books;
+        const { books } = this.props;
         return(
-            <main>
-                {books.map((book) => <div key={book.bookId}>
-                    <img src={book.posterSrc} />
-                    <br />
-                    {book.bookTitle}
-                    <br />
-                    {book.authorName}
-                </div>)}
+            <main className={ "books-container" }>
+                { books.map((book) => <BookItem key={ book.bookId } book={ book } />) }
             </main>
         )
     };

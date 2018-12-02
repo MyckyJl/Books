@@ -26,17 +26,21 @@ module.exports = {
                         fallback: 'style-loader',
                         use: ['css-loader', 'sass-loader']
                     })
+            },
+            {
+                test: /\.(gif|svg|jpg|png)$/,
+                loader: "file-loader",
             }
         ]
     },
     plugins: [
-        new CleanWebpackPlugin('dist', {} ),
         new ExtractTextPlugin({
                 filename: 'style.css'
         }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src', 'index.html'),
             filename: 'index.html'
-        })
+        }),
+        new CleanWebpackPlugin('dist', {} )
     ]
 };

@@ -1,0 +1,59 @@
+@font-face {
+  font-family: Arial - Bold MT;
+  src: url("https://nomail.com.ua/files/woff/e3e25078783f7c68baa17f05a6d4ae75.woff");
+}
+@font-face {
+  font-family: Arial MT;
+  src: url("https://nomail.com.ua/files/woff/b267362fe0bf162719681f797a756433.woff");
+}
+
+.book-item {
+  margin: 30px 10px 0;
+  width: 200px;
+  &__poster {
+    width: 200px;
+    height: 275px;
+  }
+  &__meta {
+    margin-top: 12px;
+  }
+  .meta {
+    height: 60px;
+    &__info {
+      display: flex;
+      flex-direction: column;
+      .meta__book-title {
+        margin: 0;
+        color: #444c63;
+        font-family: "Arial - Bold MT", sans-serif;
+        font-size: 16px;
+        line-height: 13px;
+      }
+      .meta__author-name {
+        margin-top: 8px;
+        color: #6f7d95;
+        font-family: "Arial MT", sans-serif;
+        font-size: 12px;
+        line-height: 9px;
+      }
+    }
+    &__stars-box {
+      margin-top: 15px;
+      display: flex;
+      .star {
+        width: 15px;
+        height: 15px;
+      }
+      .star_full {
+        background-image: url('../../../data/img/icons/star-full.png');
+      }
+      .star_empty {
+        background-image: url('../../../data/img/icons/star-empty.png');
+      }
+      .star_half {
+        background-image: url('../../../data/img/icons/star-half.png');
+      }
+    }
+  }
+}
+
