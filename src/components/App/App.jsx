@@ -1,7 +1,8 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment } from 'react';
 
 import Header from '../../containers/Header.jsx';
 import BookList from '../../containers/BookList.jsx';
+import SideBar from '../SideBar/SideBar.jsx';
 
 import './App.scss';
 
@@ -23,8 +24,11 @@ export default class App extends Component {
     render() {
         return(
             <Fragment>
-                <Header changeFilter={ this.changeFilter } />
-                <BookList filter={ this.state.filter } />
+                <SideBar />
+                <div className={ "content-container" }>
+                    <Header changeFilter={ this.changeFilter } />
+                    <BookList filter={ this.state.filter } />
+                </div>
             </Fragment>
         )
     };

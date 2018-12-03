@@ -6,3 +6,15 @@
   font-family: Arial MT;
   src: url("https://nomail.com.ua/files/woff/b267362fe0bf162719681f797a756433.woff");
 }
+body {
+  min-height: 100vh;
+  margin: 0;
+  #root {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+  }
+  .content-container {
+    width: 100%;
+  }
+}
