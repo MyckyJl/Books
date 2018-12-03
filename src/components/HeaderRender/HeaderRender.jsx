@@ -10,8 +10,8 @@ export default class Header extends Component {
                     Browse Available Books
                 </h1>
                 <div className={ "header__book-filter book-filter" }>
-                    <div className={ "book-filter__link-box" }>
-                        <button className={ "book-filter__link book-filter__link_focus" }>All Books</button>
+                    <div className={ "book-filter__link-box radio_js" }>
+                        <button className={ "book-filter__link book-filter__link_focus" } disabled>All Books</button>
                         <button className={ "book-filter__link" }>Most Recent</button>
                         <button className={ "book-filter__link" }>Most Popular</button>
                         <button className={ "book-filter__link" }>Free Books</button>

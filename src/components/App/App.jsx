@@ -6,11 +6,25 @@ import BookList from '../../containers/BookList.jsx';
 import './App.scss';
 
 export default class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            filter: 'All Books'
+        };
+    };
+
+    changeFilter = (newFilter) => {
+        this.setState({
+            filter: newFilter
+        });
+    };
+
     render() {
         return(
             <Fragment>
-                <Header />
-                <BookList />
+                <Header changeFilter={ this.changeFilter } />
+                <BookList filter={ this.state.filter } />
             </Fragment>
         )
     };

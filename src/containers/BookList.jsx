@@ -9,21 +9,21 @@ export default class BookList extends Component {
     constructor() {
         super();
         this.state = {
+            mode: 1,
             books: []
         };
     };
 
-    areBooksUploaded = () => {
-        let mode;
+    initialFunction = (filter) => {
         if (localStorage.getItem('loglevel:webpack-dev-server')) {
-            mode = 1;
+            this.state.mode = 1;
         } else {
-            mode = 0;
+            this.state.mode = 0;
         }
         if (!localStorage.getItem('0')) {
             this.uploadStandardBooks();
         }
-        this.updateState(mode);
+        this.applyFilter(filter, this.state.mode);
     };
 
     uploadStandardBooks = () => {
@@ -32,7 +32,26 @@ export default class BookList extends Component {
         });
     };
 
-    updateState = (mode) => {
+    applyFilter = (newFilter, mode) => {
+        switch(newFilter) {
+            case 'All Books':
+                this.displayAllBooks(mode);
+                break;
+            case 'Most Recent':
+                this.displayRecentBooks(mode);
+                break;
+            case 'Most Popular':
+                this.displayPopularBooks(mode);
+                break;
+            case 'Free Books':
+                this.displayFreeBooks(mode);
+                break;
+            default:
+                break;
+        }
+    };
+
+    displayAllBooks = (mode) => {
         let receivedBooks =[];
         for (let i = 0; i < localStorage.length - mode; i++) {
             const book = JSON.parse(localStorage.getItem(`${i}`));
@@ -43,8 +62,51 @@ export default class BookList extends Component {
         });
     };
 
+    displayRecentBooks = (mode) => {
+        let receivedBooks =[];
+        for (let i = 0; i < localStorage.length - mode; i++) {
+            const book = JSON.parse(localStorage.getItem(`${i}`));
+            if (book.recent) {
+                receivedBooks.push(book);
+            }
+        }
+        this.setState({
+            books: receivedBooks
+        });
+    };
+
+    displayPopularBooks = (mode) => {
+        let receivedBooks =[];
+        for (let i = 0; i < localStorage.length - mode; i++) {
+            const book = JSON.parse(localStorage.getItem(`${i}`));
+            if (book.summary >= 9) {
+                receivedBooks.push(book);
+            }
+        }
+        this.setState({
+            books: receivedBooks
+        });
+    };
+
+    displayFreeBooks = (mode) => {
+        let receivedBooks =[];
+        for (let i = 0; i < localStorage.length - mode; i++) {
+            const book = JSON.parse(localStorage.getItem(`${i}`));
+            if (book.free) {
+                receivedBooks.push(book);
+            }
+        }
+        this.setState({
+            books: receivedBooks
+        });
+    };
+
+    componentWillReceiveProps(nextProps) {
+        this.applyFilter(nextProps.filter, this.state.mode);
+    };
+
     componentDidMount() {
-        this.areBooksUploaded();
+        this.initialFunction(this.props.filter);
     };
 
     render() {
