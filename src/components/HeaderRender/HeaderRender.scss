@@ -1,0 +1,75 @@
+$reg-text-color: #8c97b2;
+$border-style: 1px solid #dadfea;
+
+.header {
+  background-color: #eef1f7;
+  &__headline {
+    height: 70px;
+    margin: 0;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    color: #444c63;
+    font-family: "Arial - Bold MT", sans-serif;
+    font-size: 22px;
+    border-bottom: $border-style;
+    box-sizing: border-box;
+  }
+  &__book-filter {
+    height: 50px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: $border-style;
+    box-sizing: border-box;
+  }
+  .book-filter {
+    &__link {
+      padding: 0 11px;
+      height: 20px;
+      color: $reg-text-color;
+      font-family: "Myriad Pro", sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      outline: none;
+      background-color: transparent;
+      border: none;
+    }
+    &__link_focus {
+      color: white;
+      cursor: default;
+      background-color: #97b3ce;
+      border-radius: 10px;
+    }
+    &__search-field {
+      width: 200px;
+      height: 32px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: white;
+      border: 1px solid rgba(140, 151, 178, 0.4);
+      border-radius: 16px;
+    }
+    .search-field {
+      &__input {
+        outline: none;
+        border: none;
+      }
+      &__input::placeholder {
+        color: $reg-text-color;
+        font-family: "Arial MT", sans-serif;
+        font-size: 13px;
+      }
+      &__loup {
+        width: 16px;
+        height: 16px;
+        font-size: 14px;
+        color: $reg-text-color;
+        cursor: pointer;
+      }
+    }
+  }
+}
