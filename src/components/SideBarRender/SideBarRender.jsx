@@ -7,7 +7,7 @@ export default class SideBarRender extends Component {
         return(
             <aside className={ "aside" }>
                 <div className={ "aside__button-container" }>
-                    <button className={ "aside__button" }>
+                    <button className={ "aside__button aside__button_js" }>
                         <i className="fas fa-plus plus-icon" />
                         ADD A BOOK
                     </button>

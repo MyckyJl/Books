@@ -4,6 +4,7 @@ import ReactDom from 'react-dom';
 import SideBar from './containers/SideBar.jsx';
 import Header from './containers/Header.jsx';
 import BookList from './containers/BookList.jsx';
+import ModalWindow from './containers/ModalWindow.jsx';
 
 import './index.scss';
 
@@ -11,24 +12,39 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            filter: 'All Books'
+            bookFilter: 'All Books',
+            modalWindowStatus: false
         };
     };
 
-    changeFilter = (newFilter) => {
+    changeBookFilter = (newFilter) => {
         this.setState({
             filter: newFilter
         });
     };
 
+    renderModalWindow = () => {
+        this.setState({
+            modalWindowStatus: true
+        });
+    };
+
+    removeModalWindow = () => {
+        this.setState({
+            modalWindowStatus: false
+        })
+    };
+
     render() {
+        const { bookFilter, modalWindowStatus } = this.state;
         return(
             <Fragment>
-                <SideBar />
+                <SideBar renderModalWindow={ this.renderModalWindow }/>
                 <div className={ "page-content" }>
-                    <Header changeFilter={ this.changeFilter } />
-                    <BookList filter={ this.state.filter } />
+                    <Header applyFilter={ this.changeBookFilter } />
+                    <BookList filter={ bookFilter } />
                 </div>
+                <ModalWindow renderStatus={ modalWindowStatus } removeModalWindow={ this.removeModalWindow } />
             </Fragment>
         )
     };

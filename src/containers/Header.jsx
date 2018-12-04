@@ -19,12 +19,12 @@ export default class Header extends Component {
             currentFilter.disabled = false;
             currentFilter = event.target;
             makeButtonPressed(currentFilter);
-            changeFilter(applyFilter.innerText);
+            applyFilter(currentFilter.innerText);
         });
     };
 
     componentDidMount() {
-        this.setInitialFilter(this.props.changeFilter);
+        this.setInitialFilter(this.props.applyFilter);
     };
 
     render() {
