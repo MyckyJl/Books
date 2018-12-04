@@ -36,7 +36,7 @@ export default class AddBookWindowRender extends Component {
                 <footer className={ "add-book-window__footer" }>
                     <button className={ "add-book-window__button cancel-button cancel-button_js" }>CANCEL</button>
                     <input type={ "submit" } className={ "add-book-window__button add-button add-button_js" }
-                           form={ "add-book-form"} value={ "ADD BOOK"} />
+                           form={ "add-book-form"} value={ "ADD BOOK"}/>
                 </footer>
             </div>
         )

@@ -10,17 +10,28 @@ export default class ModalWindow extends Component {
         };
     };
 
-    checkRender = (renderStatus, removeModalWindow) => {
+    checkRender = (renderStatus, removeModalWindow, addBook, changeWindowToRender) => {
         if (renderStatus) {
-            return <ModalWindowRender window={ this.state.windowToRender } removeModalWindow={ removeModalWindow } />
+            return <ModalWindowRender window={ this.state.windowToRender } removeModalWindow={ removeModalWindow }
+                                      addBook={ addBook } changeWindowToRender={ changeWindowToRender } clearRemains ={ this.clearRemains }/>
         }
         return null;
     };
 
+    changeWindowToRender = (window) => {
+        this.setState({
+            windowToRender: window
+        })
+    };
+
+    clearRemains = () => {
+        this.state.windowToRender = "Add a book";
+    };
+
     render() {
-        const { renderStatus, removeModalWindow }= this.props;
+        const { renderStatus, removeModalWindow, addBook }= this.props;
         return(
-            this.checkRender(renderStatus, removeModalWindow)
+            this.checkRender(renderStatus, removeModalWindow, addBook, this.changeWindowToRender)
         )
     };
 };

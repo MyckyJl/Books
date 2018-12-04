@@ -17,4 +17,9 @@ body {
   .page-content {
     width: 100%;
   }
+  @media only all and (max-width: 880px) {
+    #root {
+      min-width: 880px;
+    }
+  }
 }

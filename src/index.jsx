@@ -13,7 +13,8 @@ class App extends Component {
         super();
         this.state = {
             bookFilter: 'All Books',
-            modalWindowStatus: false
+            modalWindowStatus: false,
+            bookToAdd: ''
         };
     };
 
@@ -35,16 +36,23 @@ class App extends Component {
         })
     };
 
+    setBookToAdd = (book) => {
+        this.setState({
+            bookToAdd: book
+        });
+    };
+
     render() {
-        const { bookFilter, modalWindowStatus } = this.state;
+        const { bookFilter, modalWindowStatus, bookToAdd } = this.state;
         return(
             <Fragment>
                 <SideBar renderModalWindow={ this.renderModalWindow }/>
                 <div className={ "page-content" }>
                     <Header applyFilter={ this.changeBookFilter } />
-                    <BookList filter={ bookFilter } />
+                    <BookList filter={ bookFilter } bookToAdd={ bookToAdd }/>
                 </div>
-                <ModalWindow renderStatus={ modalWindowStatus } removeModalWindow={ this.removeModalWindow } />
+                <ModalWindow renderStatus={ modalWindowStatus } removeModalWindow={ this.removeModalWindow }
+                             addBook={ this.setBookToAdd } />
             </Fragment>
         )
     };

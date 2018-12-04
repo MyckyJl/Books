@@ -9,17 +9,11 @@ export default class BookList extends Component {
     constructor() {
         super();
         this.state = {
-            mode: 1,
             books: []
         };
     };
 
     initialFunction = (filter) => {
-        if (localStorage.getItem('loglevel:webpack-dev-server')) {
-            this.state.mode = 1;
-        } else {
-            this.state.mode = 0;
-        }
         if (!localStorage.getItem('0')) {
             this.uploadStandardBooks();
         }
@@ -51,22 +45,11 @@ export default class BookList extends Component {
         }
     };
 
-    displayAllBooks = (mode) => {
+    displayAllBooks = () => {
         let receivedBooks =[];
-        for (let i = 0; i < localStorage.length - mode; i++) {
+        for (let i = 0; i < localStorage.length; i++) {
             const book = JSON.parse(localStorage.getItem(`${i}`));
-            receivedBooks.push(book);
-        }
-        this.setState({
-            books: receivedBooks
-        });
-    };
-
-    displayRecentBooks = (mode) => {
-        let receivedBooks =[];
-        for (let i = 0; i < localStorage.length - mode; i++) {
-            const book = JSON.parse(localStorage.getItem(`${i}`));
-            if (book.recent) {
+            if (book) {
                 receivedBooks.push(book);
             }
         }
@@ -75,12 +58,14 @@ export default class BookList extends Component {
         });
     };
 
-    displayPopularBooks = (mode) => {
+    displayRecentBooks = () => {
         let receivedBooks =[];
-        for (let i = 0; i < localStorage.length - mode; i++) {
+        for (let i = 0; i < localStorage.length; i++) {
             const book = JSON.parse(localStorage.getItem(`${i}`));
-            if (book.summary >= 9) {
-                receivedBooks.push(book);
+            if (book) {
+                if (book.recent) {
+                    receivedBooks.push(book);
+                }
             }
         }
         this.setState({
@@ -88,25 +73,56 @@ export default class BookList extends Component {
         });
     };
 
-    displayFreeBooks = (mode) => {
+    displayPopularBooks = () => {
         let receivedBooks =[];
-        for (let i = 0; i < localStorage.length - mode; i++) {
+        for (let i = 0; i < localStorage.length; i++) {
             const book = JSON.parse(localStorage.getItem(`${i}`));
-            if (book.free) {
-                receivedBooks.push(book);
+            if (book) {
+                if (book.summary >= 9) {
+                    receivedBooks.push(book);
+                }
             }
         }
         this.setState({
             books: receivedBooks
+        });
+    };
+
+    displayFreeBooks = () => {
+        let receivedBooks =[];
+        for (let i = 0; i < localStorage.length; i++) {
+            const book = JSON.parse(localStorage.getItem(`${i}`));
+            if (book) {
+                if (book.free) {
+                    receivedBooks.push(book);
+                }
+            }
+        }
+        this.setState({
+            books: receivedBooks
+        });
+    };
+
+    uploadBook = (book) => {
+        localStorage.setItem(`${ this.state.books.length + 1 }`, JSON.stringify(book));
+        const newBooks = this.state.books;
+        newBooks.push(book);
+        this.setState({
+            books: newBooks
         });
     };
 
     componentWillReceiveProps(nextProps) {
-        this.applyFilter(nextProps.filter, this.state.mode);
+        if(nextProps.bookToAdd !== this.props.bookToAdd && nextProps.bookToAdd !=="") {
+            this.uploadBook(nextProps.bookToAdd);
+        } else {
+            this.applyFilter(nextProps.filter, this.state.mode);
+        }
     };
 
     componentDidMount() {
-        this.initialFunction(this.props.filter);
+        const { filter } = this.props;
+        this.initialFunction(filter);
     };
 
     render() {
