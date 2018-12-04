@@ -19,7 +19,7 @@ class App extends Component {
 
     changeBookFilter = (newFilter) => {
         this.setState({
-            filter: newFilter
+            bookFilter: newFilter
         });
     };
 

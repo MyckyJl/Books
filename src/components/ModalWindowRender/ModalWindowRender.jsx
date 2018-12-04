@@ -17,7 +17,7 @@ export default class ModalWindowRender extends Component {
     render() {
         const { window, removeModalWindow } = this.props;
         return(
-            <div className={ "modal-window" }>
+            <div className={ "modal-window modal-window_js" }>
                 {this.whichWindowShouldRender(window, removeModalWindow)}
             </div>
         )

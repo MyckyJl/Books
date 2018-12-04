@@ -4,10 +4,12 @@ import AddBookWindowRender from '../components/AddBookWindowRender/AddBookWindow
 
 export default class AddBookWindow extends Component {
     followCancelButton = (removeModalWindow) => {
-        const cancelButton = document.querySelector(".cancel-button_js");
-        cancelButton.addEventListener('click', () => {
-            removeModalWindow();
-        })
+        const cancelButtons = document.querySelectorAll(".cancel-button_js");
+        cancelButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    removeModalWindow();
+                });
+        });
     };
 
     componentDidMount() {
