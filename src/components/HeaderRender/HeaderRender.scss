@@ -25,7 +25,7 @@ $border-style: 1px solid #dadfea;
     box-sizing: border-box;
   }
   .book-filter {
-    &__link {
+    &__button {
       padding: 0 11px;
       height: 20px;
       color: $reg-text-color;
@@ -36,7 +36,7 @@ $border-style: 1px solid #dadfea;
       background-color: transparent;
       border: none;
     }
-    &__link_focus {
+    &__button_focus {
       color: white;
       cursor: default;
       background-color: #97b3ce;

@@ -4,21 +4,27 @@ import HeaderRender from '../components/HeaderRender/HeaderRender.jsx';
 
 export default class Header extends Component {
 
-    switchButton = (changeFilter) => {
-        let currentFilter = document.querySelector('.book-filter__link_focus');
-        document.querySelector('.radio_js').addEventListener('click', (event) => {
-            const target = event.target;
-            target.classList.add('book-filter__link_focus');
-            target.disabled = true;
-            currentFilter.classList.remove('book-filter__link_focus');
+    setInitialFilter = (applyFilter) => {
+        function makeButtonPressed(button) {
+            button.classList.add('book-filter__button_focus');
+            button.disabled = true;
+        }
+
+        const filterPanel = document.querySelector('.filter-panel_js');
+        let currentFilter = filterPanel.firstElementChild;
+        makeButtonPressed(currentFilter);
+
+        filterPanel.addEventListener('click', (event) => {
+            currentFilter.classList.remove('book-filter__button_focus');
             currentFilter.disabled = false;
-            currentFilter = target;
-            changeFilter(target.innerText);
+            currentFilter = event.target;
+            makeButtonPressed(currentFilter);
+            applyFilter(currentFilter.innerText);
         });
     };
 
     componentDidMount() {
-        this.switchButton(this.props.changeFilter);
+        this.setInitialFilter(this.props.applyFilter);
     };
 
     render() {

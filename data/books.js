@@ -1,10 +1,9 @@
 export const standardBooks = [
   {
-    bookId: 0,
     bookTitle: "Jewels of Nizam",
     authorName: "Geeta Devi",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 11111,
     paperBack: "Some paperback.",
     summary: 10,
     recent: true,
@@ -14,11 +13,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 1,
     bookTitle: "Cakes & Bakes",
     authorName: "Sanjeev Kapoor",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 22222,
     paperBack: "Some paperback.",
     summary: 10,
     recent: true,
@@ -28,11 +26,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 2,
     bookTitle: "Jamie’s Kitchen",
     authorName: "Jamie Oliver",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 33333,
     paperBack: "Some paperback.",
     summary: 9,
     recent: true,
@@ -42,11 +39,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 3,
     bookTitle: "Inexpensive Family Meals",
     authorName: "Simon Holst",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 44444,
     paperBack: "Some paperback.",
     summary: 8,
     recent: true,
@@ -56,11 +52,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 4,
     bookTitle: "Paleo Slow Cooking",
     authorName: "Chrissy Gower",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 55555,
     paperBack: "Some paperback.",
     recent: true,
     free: false,
@@ -70,11 +65,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 5,
     bookTitle: "Cook Like an Italian",
     authorName: "Tobie Puttock",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 66666,
     paperBack: "Some paperback.",
     recent: true,
     free: false,
@@ -84,11 +78,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 6,
     bookTitle: "Suneeta Vaswani",
     authorName: "Geeta Devi",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 77777,
     paperBack: "Some paperback.",
     recent: false,
     free: false,
@@ -98,11 +91,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 7,
     bookTitle: "Jamie Does",
     authorName: "Jamie Oliver",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 88888,
     paperBack: "Some paperback.",
     summary: 8,
     recent: false,
@@ -112,11 +104,10 @@ export const standardBooks = [
     info: "Some description."
   },
   {
-    bookId: 8,
     bookTitle: "Jamie’s italy",
     authorName: "Jamie Oliver",
     publisherName: "Some publisher.",
-    ISBN: "Some ISBN.",
+    ISBN: 1010101010,
     paperBack: "Some paperback.",
     summary: 10,
     recent: false,

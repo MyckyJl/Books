@@ -14,7 +14,18 @@ body {
     display: flex;
     align-items: stretch;
   }
+<<<<<<< HEAD:src/components/App/App.scss
   .content-container {
     width: 100%;
   }
+=======
+  .page-content {
+    width: 100%;
+  }
+  @media only all and (max-width: 880px) {
+    #root {
+      min-width: 880px;
+    }
+  }
+>>>>>>> development:src/index.scss
 }
