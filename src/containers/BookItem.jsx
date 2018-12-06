@@ -5,31 +5,28 @@ import BookItemRender from '../components/BookItemRender/BookItemRender.jsx';
 export default class BookItem extends Component {
 
     countStars = (rating) => {
-        function pushStar(className) {
-            starsArr.push(<span key ={ counter } className={ className } />);
-            counter ++;
+        function pushStar(star) {
+            starsArr.push(star);
         }
 
         let starsArr = [];
-        let counter = 0;
-
         if (rating % 2 !== 1) {
             const fullStars = rating/2;
-            while (counter < fullStars) {
-                pushStar("star star_full");
+            while (starsArr.length < fullStars) {
+                pushStar(<i key={ starsArr.length } className={ "fas fa-star star" } />);
             }
-            while (counter < 5) {
-                pushStar("star star_empty");
+            while (starsArr.length < 5) {
+                pushStar(<i key={ starsArr.length } className={ "far fa-star star" } />);
             }
             return starsArr;
         } else {
             const fullStars = (rating - 1) / 2;
-            while (counter < fullStars) {
-                pushStar("star star_full");
+            while (starsArr.length < fullStars) {
+                pushStar(<i key={ starsArr.length } className={ "fas fa-star star" } />);
             }
-            pushStar("star star_half");
-            while (counter < 5) {
-                pushStar("star star_empty");
+            pushStar(<i key={ starsArr.length } className={ "fas fa-star-half-alt star" } />);
+            while (starsArr.length < 5) {
+                pushStar(<i key={ starsArr.length } className={ "far fa-star star" } />);
             }
             return starsArr;
         }

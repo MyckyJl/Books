@@ -20,6 +20,7 @@
     padding: 0 10px;
     box-sizing: border-box;
     border-radius: 2px;
+    outline: none;
     border: 1px solid rgba(140, 151, 178, 0.4);
   }
   &__input-field::placeholder {
@@ -27,4 +28,13 @@
     font-family: "Arial MT", sans-serif;
     font-size: 13px;
   }
+  .failed-validation {
+    border-color: red;
+  }
+  .successful-validation {
+    border-color: green;
+  }
+}
+.short-input {
+  width: 240px;
 }

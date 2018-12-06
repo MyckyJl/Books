@@ -5,40 +5,37 @@ import BookListRender from '../components/BookListRender/BookListRender.jsx';
 import { standardBooks } from '../../data/books.js';
 
 export default class BookList extends Component {
-
     constructor() {
         super();
+        this.uploadStandardBooks();
         this.state = {
-            books: []
+            books: [],
+            filteredBooks: []
         };
     };
 
-    initialFunction = (filter) => {
-        if (!localStorage.getItem('0')) {
-            this.uploadStandardBooks();
-        }
-        this.applyFilter(filter, this.state.mode);
-    };
-
     uploadStandardBooks = () => {
-        standardBooks.forEach((book, number) => {
-            localStorage.setItem(`${number}`, JSON.stringify(book));
-        });
+        if (!("bookList" in localStorage)) {
+            localStorage.setItem("bookList", JSON.stringify(standardBooks));
+        }
     };
 
-    applyFilter = (newFilter, mode) => {
-        switch(newFilter) {
+    applyFilter = (filter, searchText) => {
+        switch(filter) {
             case 'All Books':
-                this.displayAllBooks(mode);
+                this.displayAllBooks();
                 break;
             case 'Most Recent':
-                this.displayRecentBooks(mode);
+                this.displayRecentBooks();
                 break;
             case 'Most Popular':
-                this.displayPopularBooks(mode);
+                this.displayPopularBooks();
                 break;
             case 'Free Books':
-                this.displayFreeBooks(mode);
+                this.displayFreeBooks();
+                break;
+            case 'Searching':
+                this.displayFoundedBooks(searchText);
                 break;
             default:
                 break;
@@ -47,82 +44,105 @@ export default class BookList extends Component {
 
     displayAllBooks = () => {
         let receivedBooks =[];
-        for (let i = 0; i < localStorage.length; i++) {
-            const book = JSON.parse(localStorage.getItem(`${i}`));
-            if (book) {
-                receivedBooks.push(book);
-            }
-        }
+        const bookList = JSON.parse(localStorage.getItem("bookList"));
+        bookList.forEach((book) => {
+            receivedBooks.push(book);
+        });
         this.setState({
-            books: receivedBooks
+            books: receivedBooks,
+            filteredBooks: receivedBooks
         });
     };
 
     displayRecentBooks = () => {
         let receivedBooks =[];
-        for (let i = 0; i < localStorage.length; i++) {
-            const book = JSON.parse(localStorage.getItem(`${i}`));
-            if (book) {
-                if (book.recent) {
-                    receivedBooks.push(book);
-                }
+        const bookList = JSON.parse(localStorage.getItem("bookList"));
+        bookList.forEach((book) => {
+            if (book.recent) {
+                receivedBooks.push(book);
             }
-        }
+        });
         this.setState({
-            books: receivedBooks
+            books: receivedBooks,
+            filteredBooks: receivedBooks
         });
     };
 
     displayPopularBooks = () => {
         let receivedBooks =[];
-        for (let i = 0; i < localStorage.length; i++) {
-            const book = JSON.parse(localStorage.getItem(`${i}`));
-            if (book) {
-                if (book.summary >= 9) {
-                    receivedBooks.push(book);
-                }
+        const bookList = JSON.parse(localStorage.getItem("bookList"));
+        bookList.forEach((book) => {
+            if (book.summary >= 9) {
+                receivedBooks.push(book);
             }
-        }
+        });
         this.setState({
-            books: receivedBooks
+            books: receivedBooks,
+            filteredBooks: receivedBooks
         });
     };
 
     displayFreeBooks = () => {
         let receivedBooks =[];
-        for (let i = 0; i < localStorage.length; i++) {
-            const book = JSON.parse(localStorage.getItem(`${i}`));
-            if (book) {
-                if (book.free) {
-                    receivedBooks.push(book);
-                }
+        const bookList = JSON.parse(localStorage.getItem("bookList"));
+        bookList.forEach((book) => {
+            if (book.free) {
+                receivedBooks.push(book);
             }
-        }
+        });
         this.setState({
-            books: receivedBooks
+            books: receivedBooks,
+            filteredBooks: receivedBooks
         });
     };
 
-    uploadBook = (book) => {
-        localStorage.setItem(`${ this.state.books.length + 1 }`, JSON.stringify(book));
-        const newBooks = this.state.books;
-        newBooks.push(book);
-        this.setState({
-            books: newBooks
+    displayFoundedBooks = (searchText) => {
+        const renderedBooks = this.state.filteredBooks;
+        const newBookList = renderedBooks.filter((item) => {
+            const bookTitleInLowerCase = item.bookTitle.toLowerCase();
+            const searchTextInLowerCase = searchText.toLowerCase();
+            if (bookTitleInLowerCase.indexOf(searchTextInLowerCase) === -1) {
+                return false;
+            }
+            return true;
         });
+        this.setState({
+            books: newBookList
+        });
+    };
+
+    uploadBook = (book, filter, searchText) => {
+        const bookList = JSON.parse(localStorage.getItem("bookList"));
+        localStorage.removeItem("bookList");
+        bookList.push(book);
+        localStorage.setItem("bookList", JSON.stringify(bookList));
+        this.setState({
+            books: bookList,
+            filteredBooks: bookList
+        });
+        this.applyFilter(filter, searchText);
     };
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.bookToAdd !== this.props.bookToAdd && nextProps.bookToAdd !=="") {
-            this.uploadBook(nextProps.bookToAdd);
+            this.uploadBook(nextProps.bookToAdd, nextProps.filter, nextProps.searchText);
+        } else if (nextProps.searchText !== "") {
+            const promise = new Promise((resolve) => {
+                this.applyFilter(nextProps.filter, nextProps.searchText);
+                resolve();
+            });
+            promise.then(() => {
+                this.displayFoundedBooks(nextProps.searchText);
+            });
         } else {
-            this.applyFilter(nextProps.filter, this.state.mode);
+            this.applyFilter(nextProps.filter, nextProps.searchText);
         }
     };
 
     componentDidMount() {
         const { filter } = this.props;
-        this.initialFunction(filter);
+        this.applyFilter(filter);
+
     };
 
     render() {

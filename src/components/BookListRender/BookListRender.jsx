@@ -9,7 +9,7 @@ export default class BookListRender extends Component {
         const { books } = this.props;
         return(
             <main className={ "books-container" }>
-                { books.map((book) => <BookItem key={ book.ISBN } book={ book } />) }
+                { books.map((book, i) => <BookItem key={ i } book={ book } />) }
             </main>
         )
     };

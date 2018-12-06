@@ -3,31 +3,51 @@ import React, { Component } from 'react';
 import HeaderRender from '../components/HeaderRender/HeaderRender.jsx';
 
 export default class Header extends Component {
+    constructor() {
+        super();
+        this.state = {
+            currentFilter: 'all-books_js'
+        };
+    };
 
-    setInitialFilter = (applyFilter) => {
-        function makeButtonPressed(button) {
-            button.classList.add('book-filter__button_focus');
-            button.disabled = true;
-        }
+    setInitialFilter = () => {
+        const initialFilter = document.querySelector(`.${this.state.currentFilter}`);
+        this.makeButtonPressed(initialFilter);
+    };
 
-        const filterPanel = document.querySelector('.filter-panel_js');
-        let currentFilter = filterPanel.firstElementChild;
-        makeButtonPressed(currentFilter);
+    changeFilter = (event) => {
+        const prevFilter = document.querySelector(`.${this.state.currentFilter}`);
+        this.makeButtonUnpressed(prevFilter);
+        const currentFilter = event.target;
+        this.makeButtonPressed(currentFilter);
+        this.state.currentFilter = currentFilter.classList[1];
+        this.props.applyFilter(currentFilter.innerText);
+    };
 
-        filterPanel.addEventListener('click', (event) => {
-            currentFilter.classList.remove('book-filter__button_focus');
-            currentFilter.disabled = false;
-            currentFilter = event.target;
-            makeButtonPressed(currentFilter);
-            applyFilter(currentFilter.innerText);
-        });
+    makeButtonPressed = (button) => {
+        button.classList.add('book-filter__button_focus');
+        button.disabled = true;
+    };
+
+    makeButtonUnpressed = (button) => {
+        button.classList.remove('book-filter__button_focus');
+        button.disabled = false;
+    };
+
+    search = (event) => {
+        const searchText = event.target.value;
+        this.props.applySearch(searchText);
+    };
+
+    shouldComponentUpdate() {
+        return false;
     };
 
     componentDidMount() {
-        this.setInitialFilter(this.props.applyFilter);
+        this.setInitialFilter();
     };
 
     render() {
-        return(<HeaderRender />)
+        return(<HeaderRender changeFilter={ this.changeFilter } search={ this.search } />)
     };
 };

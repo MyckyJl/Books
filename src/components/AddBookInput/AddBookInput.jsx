@@ -10,22 +10,27 @@ export default class AddBookInput extends Component {
         return null;
     };
 
-    calculateWidth = (short) => {
+    setShortWidth = (short, name) => {
         if (short) {
-            return {width: '250px'}
+            const shortInput = document.querySelector(`.input-box__${name}`);
+            shortInput.classList.add("short-input");
         }
-        return null;
+    };
+
+    componentDidMount() {
+        const { short, name } = this.props;
+        this.setShortWidth(short, name)
     };
 
     render() {
-        const {title, mandatory, short, name} = this.props;
+        const { title, mandatory, name } = this.props;
         return(
-            <div className={ "input-box" } style={this.calculateWidth(short)}>
+            <div className={ `input-box input-box__${ name }` }>
                 <h2 className={ "input-box__title" }>
                     {title}
                     {this.isInputMandatory(mandatory)}
                 </h2>
-                <input className={ "input-box__input-field" } placeholder={`Enter ${title}`} name={ name }/>
+                <input className={ `input-box__input-field ${ name }_js` } placeholder={ `Enter ${title}` } name={ name } />
             </div>
         )
     };

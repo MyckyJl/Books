@@ -1,4 +1,4 @@
-.aside {
+.page-aside {
   min-width: 200px;
   background-color: #1f2637;
   &__button-container {
@@ -8,7 +8,7 @@
     align-items: center;
     box-sizing: border-box;
     border-bottom: 1px solid rgba(218, 223, 234, 0.2);
-    .aside__button {
+    .page-aside__button {
       width: 160px;
       height: 44px;
       padding: 0;
@@ -32,7 +32,7 @@
     list-style: none;
     box-sizing: border-box;
   }
-  .menu{
+  .menu {
     border-bottom: 1px solid rgba(218, 223, 234, 0.2);
     &__item {
       width: 100%;

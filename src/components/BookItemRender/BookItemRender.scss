@@ -30,19 +30,9 @@
     }
     &__stars-box {
       margin-top: 15px;
-      display: flex;
       .star {
-        width: 15px;
-        height: 15px;
-      }
-      .star_full {
-        background-image: url('../../../data/img/icons/star-full.png');
-      }
-      .star_empty {
-        background-image: url('../../../data/img/icons/star-empty.png');
-      }
-      .star_half {
-        background-image: url('../../../data/img/icons/star-half.png');
+        font-size: 13px;
+        color: #ffab00;
       }
     }
   }

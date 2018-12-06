@@ -14,7 +14,8 @@ class App extends Component {
         this.state = {
             bookFilter: 'All Books',
             modalWindowStatus: false,
-            bookToAdd: ''
+            bookToAdd: '',
+            searchText: ''
         };
     };
 
@@ -42,14 +43,31 @@ class App extends Component {
         });
     };
 
+    clearBookToAdd = () => {
+        if (this.state.bookToAdd !== '') {
+            this.state.bookToAdd = '';
+        }
+    };
+
+    applySearch = (searchText) => {
+        this.setState({
+            bookFilter: "Searching",
+            searchText: searchText
+        });
+    };
+
+    componentDidUpdate() {
+        this.clearBookToAdd();
+    };
+
     render() {
-        const { bookFilter, modalWindowStatus, bookToAdd } = this.state;
+        const { bookFilter, modalWindowStatus, bookToAdd, searchText } = this.state;
         return(
             <Fragment>
-                <SideBar renderModalWindow={ this.renderModalWindow }/>
+                <SideBar renderModalWindow={ this.renderModalWindow } />
                 <div className={ "page-content" }>
-                    <Header applyFilter={ this.changeBookFilter } />
-                    <BookList filter={ bookFilter } bookToAdd={ bookToAdd }/>
+                    <Header applyFilter={ this.changeBookFilter } applySearch={ this.applySearch } />
+                    <BookList filter={ bookFilter } bookToAdd={ bookToAdd } searchText={ searchText } />
                 </div>
                 <ModalWindow renderStatus={ modalWindowStatus } removeModalWindow={ this.removeModalWindow }
                              addBook={ this.setBookToAdd } />

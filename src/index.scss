@@ -1,10 +1,10 @@
 @font-face {
   font-family: Arial - Bold MT;
-  src: url("https://nomail.com.ua/files/woff/e3e25078783f7c68baa17f05a6d4ae75.woff");
+  src: url("../data/fonts/Arial - Bold MT.woff");
 }
 @font-face {
   font-family: Arial MT;
-  src: url("https://nomail.com.ua/files/woff/b267362fe0bf162719681f797a756433.woff");
+  src: url("../data/fonts/Arial MT.woff");
 }
 body {
   min-height: 100vh;
@@ -20,9 +20,39 @@ body {
   .page-content {
     width: 100%;
   }
-  @media only all and (max-width: 880px) {
-    #root {
-      min-width: 880px;
-    }
+}
+@media only all and (max-width: 1540px) {
+  #root {
+    min-width: 1540px;
+  }
+}
+@media only all and (max-width: 1320px) {
+  #root {
+    min-width: 1320px;
+  }
+}
+@media only all and (max-width: 1100px) {
+  #root {
+    min-width: 1100px;
+  }
+}
+@media only all and (max-width: 880px) {
+  #root {
+    min-width: 880px;
+  }
+}
+@media only all and (max-width: 660px) {
+  #root {
+    min-width: 660px;
+  }
+  .page-aside {
+    min-width: 180px;
+  }
+  .add-book-window {
+    margin-top: 70px;
+    width: 600px;
+  }
+  .short-input {
+    width: 200px;
   }
 }

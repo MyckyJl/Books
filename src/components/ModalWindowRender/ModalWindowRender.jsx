@@ -6,23 +6,24 @@ import CongratulationsWindow from '../../components/CongratulationsWindow/Congra
 import './ModalWindowRender.scss';
 
 export default class ModalWindowRender extends Component {
-    whichWindowShouldRender = (window, removeModalWindow, addBook, changeWindowToRender, clearRemains) => {
+    whichWindowShouldRender = () => {
+        const { window, removeModalWindow, addBook, changeWindowToRender, addedBook } = this.props;
         switch (window) {
             case "Add a book":
                 return <AddBookWindow removeModalWindow={ removeModalWindow } addBook={ addBook }
-                                      changeWindowToRender={ changeWindowToRender } />;
+                                      changeWindowToRender={ changeWindowToRender } window={ window } />;
             case "Congratulations":
-                return <CongratulationsWindow removeModalWindow={ removeModalWindow } clearRemains={ clearRemains }/>;
+                return <CongratulationsWindow removeModalWindow={ removeModalWindow } changeWindowToRender={ changeWindowToRender }
+                                              addedBook ={ addedBook } />;
             default:
                 break;
         }
     };
 
     render() {
-        const { window, removeModalWindow, addBook, changeWindowToRender, clearRemains } = this.props;
         return(
             <div className={ "modal-window modal-window_js" }>
-                {this.whichWindowShouldRender(window, removeModalWindow, addBook, changeWindowToRender, clearRemains)}
+                {this.whichWindowShouldRender()}
             </div>
         )
     };

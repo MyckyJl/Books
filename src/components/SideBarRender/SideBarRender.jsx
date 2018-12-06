@@ -4,15 +4,16 @@ import './SideBarRender.scss';
 
 export default class SideBarRender extends Component {
     render() {
+        const { renderModalWindow } = this.props;
         return(
-            <aside className={ "aside" }>
-                <div className={ "aside__button-container" }>
-                    <button className={ "aside__button aside__button_js" }>
+            <aside className={ "page-aside" }>
+                <div className={ "page-aside__button-container" }>
+                    <button className={ "page-aside__button page-aside__button_js" } onClick={ renderModalWindow }>
                         <i className="fas fa-plus plus-icon" />
                         ADD A BOOK
                     </button>
                 </div>
-                <ul className={ "aside__menu menu" }>
+                <ul className={ "page-aside__menu menu" }>
                     <li className={ "menu__item" }>
                         <i className="fas fa-book menu__img" />
                         Now Reading

@@ -25,6 +25,11 @@ $border-style: 1px solid #dadfea;
     box-sizing: border-box;
   }
   .book-filter {
+    &__button-box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
     &__button {
       padding: 0 11px;
       height: 20px;

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 
+
+
 import './BookItemRender.scss';
 
 export default class BookItemRender extends Component {
 
     render() {
-        const { book, starsArr } = this.props;
+        const { book, starsArr} = this.props;
         const { posterSrc, bookTitle, authorName } = book;
         return(
             <div className={ "book-item" }>
@@ -21,5 +23,5 @@ export default class BookItemRender extends Component {
                 </div>
             </div>
         )
-    }
-}
+    };
+};
