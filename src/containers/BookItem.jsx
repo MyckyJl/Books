@@ -33,9 +33,9 @@ export default class BookItem extends Component {
     };
 
     render() {
-        const { book } = this.props;
+        const { book, openBookWindow } = this.props;
         const starsArr = this.countStars(book.summary);
 
-        return(<BookItemRender book={ book } starsArr={ starsArr } />)
+        return(<BookItemRender book={ book } starsArr={ starsArr } openBookWindow={ openBookWindow }/>)
     };
 };

@@ -34,6 +34,17 @@
   .successful-validation {
     border-color: green;
   }
+  &__info-field {
+    height: 32px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dadfea;
+    color: #444c63;
+    font-family: "Arial - Bold MT", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+  }
 }
 .short-input {
   width: 240px;

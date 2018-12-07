@@ -3,6 +3,19 @@ import React, { Component } from 'react';
 import AddBookWindowRender from '../components/AddBookWindowRender/AddBookWindowRender.jsx';
 
 export default class AddBookWindow extends Component {
+    constructor() {
+        super();
+        this.state = {
+            tab: 'General'
+        };
+    };
+
+    changeTab = (event) => {
+        const newTab = event.target.innerText;
+        this.setState({
+            tab: newTab
+        });
+    };
 
     addBookButtonAct = (event) => {
         const addBookButton = event.target;
@@ -22,7 +35,7 @@ export default class AddBookWindow extends Component {
     };
 
     validation = (book) => {
-        const { addBook, changeWindowToRender } = this.props;
+        const { addBook, resetModalWindow } = this.props;
         const { bookTitle, authorName, publisherName, ISBN, summary } = book;
         let bookTitleValidation;
         let authorNameValidation;
@@ -62,7 +75,7 @@ export default class AddBookWindow extends Component {
             publisherNameField.classList.add("successful-validation");
             publisherNameValidation = true;
         }
-        if (ISBN === '' || !ISBN.match(/^\d+/)) {
+        if (ISBN === '' || (/\D/.test(ISBN))) {
             const ISBNField = document.querySelector(".ISBN_js");
             ISBNField.classList.remove("successful-validation");
             ISBNField.classList.add("failed-validation");
@@ -92,12 +105,15 @@ export default class AddBookWindow extends Component {
         const validationStatus = bookTitleValidation && authorNameValidation && publisherNameValidation && ISBNValidation && summaryValidation;
         if (validationStatus) {
             addBook(book);
-            changeWindowToRender("Congratulations", bookTitle);
+            resetModalWindow("Congratulations");
         }
     };
 
     render() {
-        const { removeModalWindow } = this.props;
-        return(<AddBookWindowRender addBookButtonAct={ this.addBookButtonAct } removeModalWindow={ removeModalWindow } />)
+        const { removeModalWindow, processedBook, window, resetModalWindow } = this.props;
+        const { tab } = this.state;
+        return(<AddBookWindowRender addBookButtonAct={ this.addBookButtonAct } removeModalWindow={ removeModalWindow }
+                                    changeTab={ this.changeTab } tab={ tab } processedBook={ processedBook }
+                                    window={ window } resetModalWindow={ resetModalWindow } />)
     };
 };

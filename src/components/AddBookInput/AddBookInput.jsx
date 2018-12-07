@@ -4,7 +4,8 @@ import './AddBookInput.scss';
 
 export default class AddBookInput extends Component {
     isInputMandatory = (mandatory) => {
-        if (mandatory) {
+        const { window } = this.props;
+        if (mandatory && window !== "Book info") {
             return <span className={ "input-box__asterisk" }>*</span>
         }
         return null;
@@ -17,20 +18,28 @@ export default class AddBookInput extends Component {
         }
     };
 
+    inputOrInfo = (window, processedBook, name, title) => {
+        if (window === "Add New Books") {
+            return <input className={ `input-box__input-field ${ name }_js` } placeholder={ `Enter ${title}` } name={ name } />;
+        } else {
+            return <div className={ "input-box__info-field" }>{processedBook[name]}</div>
+        }
+    };
+
     componentDidMount() {
-        const { short, name } = this.props;
+        const { short, name} = this.props;
         this.setShortWidth(short, name)
     };
 
     render() {
-        const { title, mandatory, name } = this.props;
+        const { title, mandatory, name, processedBook, window } = this.props;
         return(
             <div className={ `input-box input-box__${ name }` }>
                 <h2 className={ "input-box__title" }>
                     {title}
-                    {this.isInputMandatory(mandatory)}
+                    {this.isInputMandatory(mandatory, window)}
                 </h2>
-                <input className={ `input-box__input-field ${ name }_js` } placeholder={ `Enter ${title}` } name={ name } />
+                {this.inputOrInfo(window, processedBook, name, title)}
             </div>
         )
     };

@@ -124,8 +124,16 @@ export default class BookList extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.bookToAdd !== this.props.bookToAdd && nextProps.bookToAdd !=="") {
-            this.uploadBook(nextProps.bookToAdd, nextProps.filter, nextProps.searchText);
+
+        if(this.props.addedBookStatus) {
+            const promise = new Promise((resolve) => {
+                this.uploadBook(nextProps.processedBook, nextProps.filter, nextProps.searchText);
+                resolve();
+            });
+            promise.then(() => {
+                this.displayFoundedBooks(nextProps.searchText);
+            });
+
         } else if (nextProps.searchText !== "") {
             const promise = new Promise((resolve) => {
                 this.applyFilter(nextProps.filter, nextProps.searchText);
@@ -146,6 +154,7 @@ export default class BookList extends Component {
     };
 
     render() {
-        return(<BookListRender books={ this.state.books } />)
+        const { openBookWindow } = this.props;
+        return(<BookListRender books={ this.state.books } openBookWindow={ openBookWindow } />)
     };
 };

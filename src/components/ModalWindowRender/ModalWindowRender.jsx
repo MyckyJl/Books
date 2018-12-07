@@ -7,14 +7,19 @@ import './ModalWindowRender.scss';
 
 export default class ModalWindowRender extends Component {
     whichWindowShouldRender = () => {
-        const { window, removeModalWindow, addBook, changeWindowToRender, addedBook } = this.props;
+        const { window, removeModalWindow, addBook, resetModalWindow, processedBook } = this.props;
         switch (window) {
-            case "Add a book":
+            case "Add New Books":
                 return <AddBookWindow removeModalWindow={ removeModalWindow } addBook={ addBook }
-                                      changeWindowToRender={ changeWindowToRender } window={ window } />;
+                                      resetModalWindow={ resetModalWindow } window={ window }
+                                      processedBook={ processedBook } />;
             case "Congratulations":
-                return <CongratulationsWindow removeModalWindow={ removeModalWindow } changeWindowToRender={ changeWindowToRender }
-                                              addedBook ={ addedBook } />;
+                return <CongratulationsWindow removeModalWindow={ removeModalWindow } resetModalWindow={ resetModalWindow }
+                                              processedBook ={ processedBook } />;
+            case "Book info":
+                return <AddBookWindow removeModalWindow={ removeModalWindow } addBook={ addBook }
+                                      resetModalWindow={ resetModalWindow } window={ window }
+                                      processedBook={ processedBook } />;
             default:
                 break;
         }

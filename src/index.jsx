@@ -13,9 +13,11 @@ class App extends Component {
         super();
         this.state = {
             bookFilter: 'All Books',
+            searchText: '',
             modalWindowStatus: false,
-            bookToAdd: '',
-            searchText: ''
+            modalWindow: 'Add New Books',
+            addedBookStatus: false,
+            processedBook: ''
         };
     };
 
@@ -39,13 +41,14 @@ class App extends Component {
 
     setBookToAdd = (book) => {
         this.setState({
-            bookToAdd: book
+            processedBook: book,
+            addedBookStatus: true
         });
     };
 
-    clearBookToAdd = () => {
-        if (this.state.bookToAdd !== '') {
-            this.state.bookToAdd = '';
+    clearAddedBook = () => {
+        if (this.state.addedBookStatus !== false) {
+            this.state.addedBookStatus = false;
         }
     };
 
@@ -56,21 +59,38 @@ class App extends Component {
         });
     };
 
+    openBookWindow = (book) => {
+        this.setState({
+            modalWindowStatus: true,
+            modalWindow: "Book info",
+            processedBook: book
+        });
+    };
+
+    resetModalWindow = (window) => {
+        this.setState({
+            modalWindow: window,
+        });
+    };
+
     componentDidUpdate() {
-        this.clearBookToAdd();
+        this.clearAddedBook();
     };
 
     render() {
-        const { bookFilter, modalWindowStatus, bookToAdd, searchText } = this.state;
+        const { bookFilter, modalWindowStatus, processedBook, searchText, modalWindow, addedBookStatus} = this.state;
         return(
             <Fragment>
                 <SideBar renderModalWindow={ this.renderModalWindow } />
                 <div className={ "page-content" }>
                     <Header applyFilter={ this.changeBookFilter } applySearch={ this.applySearch } />
-                    <BookList filter={ bookFilter } bookToAdd={ bookToAdd } searchText={ searchText } />
+                    <BookList filter={ bookFilter } processedBook={ processedBook } searchText={ searchText }
+                              openBookWindow={ this.openBookWindow } addedBookStatus={ addedBookStatus }
+                              clearAddedBook={ this.clearAddedBook } />
                 </div>
                 <ModalWindow renderStatus={ modalWindowStatus } removeModalWindow={ this.removeModalWindow }
-                             addBook={ this.setBookToAdd } />
+                             addBook={ this.setBookToAdd } processedBook={ processedBook } window={ modalWindow }
+                             resetModalWindow={ this.resetModalWindow } clearAddedBook={ this.clearAddedBook }/>
             </Fragment>
         )
     };
